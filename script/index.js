@@ -9,6 +9,7 @@ const GET_ALL_COCKTAILS = API + 'filter.php?c=Cocktail'
 const GET_BY_NAME = API + 'search.php?s='
 const GET_FYLTER = API + 'filter.php?a='
 const GET_INGREDIENTS = API + 'lookup.php?i='
+const GET_THE_INGREDIENT = API + 'filter.php?i='
 
 const getAllCocktails = async () => {
   const request = await fetch(GET_ALL_COCKTAILS)
@@ -39,9 +40,16 @@ const getFiltered = async () => {
 const getSelected = async (item) => {
   const request = await fetch(GET_INGREDIENTS + item.idDrink)
   const response = await request.json()
-  console.log(response.drinks)
+  //console.log(response.drinks)
 
   renderCocktails(response.drinks, true)
+}
+
+const getIngredient = async (ingredient) => {
+  const request = await fetch(GET_THE_INGREDIENT + ingredient)
+  const response = await request.json()
+  //console.log(response)
+  renderCocktails(response.drinks, false)
 }
 
 const renderCocktails = (drinks, displayIng) => {
@@ -55,26 +63,37 @@ const renderCocktails = (drinks, displayIng) => {
         const ingredients = document.createElement('div')
 
         if (displayIng) {
-          const ingredient1 = document.createElement('p')
+          /*const ingredient1 = document.createElement('p')
           const ingredient2 = document.createElement('p')
           const ingredient3 = document.createElement('p')
           const ingredient4 = document.createElement('p')
-          const sostav = document.createElement('h4')
 
-          sostav.textContent = 'Ingredients:'
           ingredient1.textContent = el.strIngredient1
           ingredient2.textContent = el.strIngredient2
           ingredient3.textContent = el.strIngredient3
           ingredient4.textContent = el.strIngredient4
 
-          ingredients.append(
-            sostav,
-            ingredient1,
-            ingredient2,
-            ingredient3,
-            ingredient4,
-          )
-          console.log(el.strGlass)
+          ingredient1.addEventListener('click', () => {
+            getIngredient(el.strIngredient1)
+
+          })*/
+
+          ingredients.innerHTML = '<h4>Ingredients:</h4>'
+          for (let i = 0; i < 4; i++) {
+            const ingredient = document.createElement('p')
+            for (let obj in el) {
+              if (obj === `strIngredient${i}`) ingredient.textContent = el[obj]
+            }
+
+            ingredient.style.cursor = 'pointer'
+            ingredients.append(ingredient)
+            ingredient.addEventListener('click', () => {
+              getIngredient(ingredient.textContent)
+            })
+          }
+
+          //ingredients.append(ingredient1, ingredient2, ingredient3, ingredient4)
+          //console.log(el.strGlass)
         }
 
         img.src = el.strDrinkThumb
@@ -84,7 +103,7 @@ const renderCocktails = (drinks, displayIng) => {
         title.textContent = el.strDrink
         card.className = 'card'
 
-        card.addEventListener('click', () => {
+        img.addEventListener('click', () => {
           getSelected(el)
         })
 
