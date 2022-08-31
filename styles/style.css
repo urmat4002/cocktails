@@ -1,0 +1,47 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+.wrapper {
+  height: 100%;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: rgb(207, 87, 197);
+  padding-top: 15px;
+  height: 100%;
+}
+
+#output {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: 1px solid black;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  background-color: rgb(202, 169, 233);
+  box-shadow: 7px -5px 5px silver;
+}
+
+form {
+  border: 1px solid black;
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 5px;
+  background-color: rgb(178, 158, 196);
+}
+#inp,
+#btn,
+#select {
+  border-radius: 3px;
+}
