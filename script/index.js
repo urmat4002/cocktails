@@ -106,6 +106,9 @@ const renderCocktails = (drinks, displayIng) => {
         img.addEventListener('click', () => {
           getSelected(el)
         })
+        title.addEventListener('click', () => {
+          getSelected(el)
+        })
 
         card.append(img, title, ingredients)
         output.append(card)
