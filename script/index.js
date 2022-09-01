@@ -88,6 +88,7 @@ const renderCocktails = (drinks, displayIng) => {
             ingredient.style.cursor = 'pointer'
             ingredients.append(ingredient)
             ingredient.addEventListener('click', () => {
+              event.stopPropagation()
               getIngredient(ingredient.textContent)
             })
           }
@@ -103,10 +104,7 @@ const renderCocktails = (drinks, displayIng) => {
         title.textContent = el.strDrink
         card.className = 'card'
 
-        img.addEventListener('click', () => {
-          getSelected(el)
-        })
-        title.addEventListener('click', () => {
+        card.addEventListener('click', () => {
           getSelected(el)
         })
 
